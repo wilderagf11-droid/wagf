@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Invitación Revelación de Sexo</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+<style>
+body{
+margin:0;
+font-family:'Poppins',sans-serif;
+background:linear-gradient(90deg,#cce6ff,#ffd6e8);
+height:100vh;
+overflow:hidden;
+display:flex;
+justify-content:center;
+align-items:center;
+}
+
+.container{
+background:#ffffffee;
+padding:25px;
+border-radius:25px;
+text-align:center;
+box-shadow:0 0 25px rgba(0,0,0,.15);
+max-width:360px;
+z-index:2;
+}
+
+h1{
+font-family:'Great Vibes',cursive;
+font-size:36px;
+color:#ff6fae;
+margin-bottom:10px;
+}
+
+p{
+color:#555;
+font-size:15px;
+margin:8px 0;
+}
+
+.date{
+font-weight:600;
+font-size:16px;
+}
+
+.counter{
+font-size:16px;
+font-weight:600;
+color:#444;
+margin:10px 0;
+}
+
+button{
+width:100%;
+padding:14px;
+margin:8px 0;
+border-radius:25px;
+border:none;
+font-size:16px;
+cursor:pointer;
+transition:.3s;
+}
+
+button:hover{transform:scale(1.05);}
+
+.boy{background:#9fd3ff;}
+.girl{background:#ffc1dc;}
+.map{background:#b5f5c8;}
+.rsvp{background:#ffe08a;}
+
+.float{
+position:absolute;
+animation:float 8s infinite linear;
+font-size:24px;
+}
+
+@keyframes float{
+from{transform:translateY(100vh);}
+to{transform:translateY(-10vh);}
+}
+
+.start{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:#ffffff;
+display:flex;
+justify-content:center;
+align-items:center;
+flex-direction:column;
+z-index:10;
+}
+
+.start button{
+background:#ffb6d5;
+font-size:18px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="start" id="startScreen">
+<h2>🎵 Toca para abrir tu invitación 🎵</h2>
+<button onclick="startInvitation()">Abrir invitación</button>
+</div>
+
+<audio id="music" loop>
+<source src="https://cdn.pixabay.com/audio/2022/03/22/audio_9a5c7a2f1d.mp3">
+</audio>
+
+<audio id="click">
+<source src="https://cdn.pixabay.com/audio/2022/03/15/audio_3f0d06ec6f.mp3">
+</audio>
+
+<div class="container">
+<h1>Revelación de Sexo</h1>
+
+<p>✨ Con mucha ilusión y amor en nuestros corazones queremos invitarte a compartir uno de los momentos más especiales de nuestra vida.</p>
+
+<p><strong>María & Wilder</strong> esperan con emoción revelar si nuestro milagro será 💙 niño o 💖 niña.</p>
+
+<p>🎈 Acompáñanos a descubrir este hermoso secreto 🎈</p>
+
+<p class="date">📅 Sábado 7 de marzo<br>⏰ 3:00 PM</p>
+
+<div class="counter" id="countdown">⏳ Cargando contador...</div>
+
+<button class="boy" onclick="teamBoy()">💙 Team Boy</button>
+<button class="girl" onclick="teamGirl()">💖 Team Girl</button>
+<button class="map" onclick="openMap()">📍 Cómo llegar</button>
+<button class="rsvp" onclick="rsvp()">📲 Confirmar asistencia</button>
+
+<p>✨ Te esperamos con mucho amor ✨</p>
+</div>
+
+<script>
+const music=document.getElementById("music");
+const click=document.getElementById("click");
+
+function startInvitation(){
+document.getElementById("startScreen").style.display="none";
+music.play();
+}
+
+function sound(){
+click.currentTime=0;
+click.play();
+}
+
+function openMap(){
+sound();
+window.open("https://www.google.com/maps/search/?api=1&query=1412+Chariot+Dr+Murfreesboro+TN+37130");
+}
+
+function rsvp(){
+sound();
+const msg=encodeURIComponent("Hola María y Wilder 💕 Confirmo mi asistencia a la revelación de sexo 🎉👶");
+window.open("https://wa.me/16294628232?text="+msg);
+}
+
+// contador regresivo
+const eventDate = new Date("March 7, 2026 15:00:00").getTime();
+
+setInterval(function(){
+const now = new Date().getTime();
+const distance = eventDate - now;
+
+const days = Math.floor(distance / (1000*60*60*24));
+const hours = Math.floor((distance % (1000*60*60*24)) / (1000*60*60));
+const minutes = Math.floor((distance % (1000*60*60)) / (1000*60));
+const seconds = Math.floor((distance % (1000*60)) / 1000);
+
+document.getElementById("countdown").innerHTML =
+"⏳ Faltan " + days + " días " + hours + "h " + minutes + "m " + seconds + "s";
+},1000);
+
+// Team Boy = globos
+function teamBoy(){
+sound();
+for(let i=0;i<20;i++){
+let b=document.createElement("div");
+b.className="float";
+b.innerHTML="🎈";
+b.style.left=Math.random()*100+"vw";
+document.body.appendChild(b);
+setTimeout(()=>b.remove(),5000);
+}
+}
+
+// Team Girl = corazones
+function teamGirl(){
+sound();
+for(let i=0;i<20;i++){
+let h=document.createElement("div");
+h.className="float";
+h.innerHTML="💖";
+h.style.left=Math.random()*100+"vw";
+document.body.appendChild(h);
+setTimeout(()=>h.remove(),5000);
+}
+}
+</script>
+
+</body>
+</html>
